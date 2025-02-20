@@ -1,7 +1,7 @@
 import os 
 import numpy as np
 import pandas as pd
-from mlproject.pipeline.prediction import PredictionPipeline
+from mlproject.pipeline.s6_prediction import PredictionPipeline
 from flask import Flask, render_template, request, redirect, url_for
 
 

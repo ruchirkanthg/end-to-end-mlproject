@@ -1,7 +1,8 @@
 import os
 import pandas as pd
 from mlproject import logger
-from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import ElasticNet, LogisticRegression
+from xgboost import XGBClassifier
 import joblib
 from mlproject.entity.config_entity import ModelTrainerConfig
 
@@ -21,8 +22,16 @@ class ModelTrainer:
         test_y = test_data[[self.config.target_col]]
 
 
-        lr = ElasticNet(alpha=self.config.alpha, l1_ratio=self.config.l1_ratio, random_state=42)
-        lr.fit(train_x, train_y)
+        # lr = ElasticNet(alpha=self.config.alpha, l1_ratio=self.config.l1_ratio, random_state=42)
+        # lr.fit(train_x, train_y)
 
-        joblib.dump(lr, os.path.join(self.config.root_dir, self.config.model_name))
+        xgb_model = XGBClassifier(
+        objective = self.config.objective,  # Binary classification
+        eval_metric = self.config.eval_metric,  # Use AUC as the evaluation metric
+        random_state=42
+        )
+
+        xgb_model.fit(train_x, train_y)
+
+        joblib.dump(xgb_model, os.path.join(self.config.root_dir, self.config.model_name))
 

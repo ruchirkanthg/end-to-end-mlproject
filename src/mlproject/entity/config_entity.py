@@ -27,8 +27,8 @@ class ModelTrainerConfig:
     train_data_path: Path
     test_data_path: Path
     model_name: str
-    alpha: float
-    l1_ratio: float
+    objective: str
+    eval_metric: str
     target_col: str
 
 @dataclass(frozen=True)

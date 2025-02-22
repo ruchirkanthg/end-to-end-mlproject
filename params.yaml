@@ -1,3 +1,9 @@
-ElasticNet:
-  alpha: 0.2
-  l1_ratio: 0.1
+# ElasticNet:
+#   alpha: 0.2
+#   l1_ratio: 0.1
+
+XGBClassifier:
+  objective: 'multi:softprob'
+  eval_metric: 'mlogloss'
+
+  
